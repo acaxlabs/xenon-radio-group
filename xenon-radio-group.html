@@ -1,0 +1,42 @@
+<link rel="import" href="../polymer/polymer.html">
+<link rel="import" href="../paper-radio-group/paper-radio-group.html">
+<link rel="import" href="../paper-radio-button/paper-radio-button.html">
+<link rel="import" href="../iron-form-element-behavior/iron-form-element-behavior.html">
+<dom-module id="xenon-radio-group">
+    <template>
+        <style is="custom-style">
+            #error.show { visibility: visible; }
+            #error{ font-size:small; color: var(--paper-input-container-invalid-color, --error-color); visibility:hidden; }
+        </style>
+        <paper-radio-group id="group" attr-for-selected="{{attrForSelected}}" selected="{{selected}}">
+            <content id="content"></content>
+        </paper-radio-group>
+        <div id="error">[[errorMessage]]</div>
+    </template>
+    <script>
+        Polymer({
+            is: 'xenon-radio-group',
+            properties: {
+                errorMessage: { type: String, value: "Please Select An Option" }, 
+                invalid: { type: Boolean, notify: true, value: false }, 
+                selected: { type: Object, notify: true, observer:"_selectedChange" }, 
+                required: { type: Boolean }
+            },
+            behaviors: [
+                Polymer.IronFormElementBehavior
+            ],
+            _selectedChange: function() {
+                this.toggleClass("show", false, this.$.error);
+            },
+            validate: function () {
+                var nodes = this.querySelectorAll("paper-radio-button");
+                var valid = !this.required; 
+                for(var i = 0; i < nodes.length; i++) {
+                    if(nodes[i].checked) valid = true;
+                }
+                this.toggleClass("show", !valid, this.$.error);
+                return valid; 
+            }
+        });
+    </script>
+</dom-module>

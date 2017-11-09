@@ -1,0 +1,15 @@
+{
+  "name": "xenon-radio-group",
+  "authors": [
+    "Don Archer <drasticp@gmail.com>"
+  ],
+  "description": "Like paper-radio-group but supports reqiured.",
+  "main": "",
+  "license": "MIT",
+  "homepage": "",
+  "dependencies": {
+    "paper-input": "PolymerElements/paper-radio-group",
+    "iron-validatable-behavior": "PolymerElements/iron-validatable-behavior",
+    "iron-form-element-behavior": "PolymerElements/iron-form-element-behavior"
+  }
+}

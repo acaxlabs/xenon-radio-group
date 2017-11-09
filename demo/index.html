@@ -1,0 +1,42 @@
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<html>
+    <head>
+        <script src="../../webcomponentsjs/webcomponents.js"></script>
+        <link rel="import" href="../../polymer/polymer.html"/>
+        <link rel="import" href="../../paper-radio-button/paper-radio-button.html"/>
+        <link rel="import" href="../../iron-form/iron-form.html"/>
+        <link rel="import" href="../xenon-radio-group.html"/>
+    </head>
+    <body>
+        <dom-module id="demo-element">
+            <template>
+                <form is="iron-form" id="form">
+                    <xenon-radio-group required selected="{{something}}">
+                        <paper-radio-button name="one" value="1">One</paper-radio-button>
+                        <paper-radio-button name="two" value="2">Two</paper-radio-button>
+                    </xenon-radio-group>
+                    <xenon-radio-group>
+                        <paper-radio-button>Not</paper-radio-button>
+                        <paper-radio-button>Required</paper-radio-button>
+                    </xenon-radio-group>
+                </form>
+                <button on-click="_doValidate">Validate</button>
+                <div>Selected: {{something}}</div>
+            </template>
+            <script>
+                HTMLImports.whenReady( function(){
+                    Polymer({
+                        is:"demo-element", 
+                        ready: function() {
+                            this.something = "nothing";
+                        }, 
+                        _doValidate: function() {
+                            var isValid = this.$.form.validate();
+                        }
+                    });
+                });
+            </script>
+        </dom-module>
+        <demo-element></demo-element>
+    </body>
+</html>
